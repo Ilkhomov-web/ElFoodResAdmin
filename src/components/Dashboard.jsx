@@ -59,7 +59,7 @@ export default function Dashboard(props) {
           }}
         >
           <Link
-            to={""}
+            to={"/restaurant-table"}
             style={{
               width: "100%",
               textDecoration: "none",
@@ -72,7 +72,7 @@ export default function Dashboard(props) {
               </ListItemIcon>
               <ListItemText
                 color="rgb(200 16 158)"
-                primary={"Create Restaurant"}
+                primary={"Restaurant Table"}
               />
             </ListItemButton>
           </Link>
