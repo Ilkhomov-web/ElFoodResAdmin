@@ -1,15 +1,58 @@
-import { Box, Button, Container, Typography } from "@mui/material";
-import React from "react";
+import { Box, Button, Container, Snackbar, Typography } from "@mui/material";
+import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import Dashboard from "../components/Dashboard";
 import RestaurantTable from "../data/RestaurantTable";
 import TableCard from "../components/TableCard";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
 
 function RestaurantTableCreatePage() {
-  const [open, setOpen] = React.useState(false);
+  const [table, setTable] = useState(RestaurantTable);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [open, setOpen] = useState(false);
+
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
   };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const handleCreateTable = () => {
+    const newTable = {
+      id: table.length + 1,
+      tableNumber: table.length + 1,
+      order: false,
+    };
+    if (table.length === 15) {
+      setOpenSnackbar(true);
+      return;
+    }
+    setTable([...table, newTable]);
+    console.log(table);
+  };
+
+  const action = (
+    <React.Fragment>
+      <Button color="secondary" size="small" onClick={handleClose}>
+        UNDO
+      </Button>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={handleClose}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </React.Fragment>
+  );
 
   return (
     <Box>
@@ -29,7 +72,10 @@ function RestaurantTableCreatePage() {
           >
             Restaurant Table
           </Typography>
-          <Button sx={{ background: "rgb(200 16 158)", color: "white" }}>
+          <Button
+            onClick={handleCreateTable}
+            sx={{ background: "rgb(200 16 158)", color: "white" }}
+          >
             Create Table
           </Button>
         </Box>
@@ -41,11 +87,25 @@ function RestaurantTableCreatePage() {
             justifyContent: "left",
           }}
         >
-          {RestaurantTable.map((table) => (
+          {table.map((table) => (
             <TableCard key={table.id} table={table} />
           ))}
         </Box>
       </Container>
+      <Snackbar
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        open={openSnackbar}
+        autoHideDuration={5000}
+        onClose={handleClose}
+        message="Siz Max 50 Ta Stol Yarata Olasiz!"
+        action={action}
+        ContentProps={{
+          sx: {
+            backgroundColor: "rgb(200 16 158)", // o'zingiz xohlagan rang
+            color: "white",
+          },
+        }}
+      />
     </Box>
   );
 }

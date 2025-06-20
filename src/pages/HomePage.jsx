@@ -5,6 +5,7 @@ import Dashboard from "../components/Dashboard";
 import TableCard from "../components/TableCard";
 import RestaurantTable from "../data/RestaurantTable";
 import TodayTrade from "../components/TodayTrade";
+import FastSellInfoTable from "../components/FastSellInfoTable";
 
 function HomePage() {
   const [open, setOpen] = React.useState(false);
@@ -36,6 +37,7 @@ function HomePage() {
           ))}
         </Box>
         <TodayTrade />
+        <FastSellInfoTable />
       </Container>
     </Box>
   );
