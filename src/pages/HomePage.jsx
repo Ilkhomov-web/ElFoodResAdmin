@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import Dashboard from "../components/Dashboard";
 import TableCard from "../components/TableCard";
 import RestaurantTable from "../data/RestaurantTable";
+import TodayTrade from "../components/TodayTrade";
 
 function HomePage() {
   const [open, setOpen] = React.useState(false);
@@ -27,12 +28,14 @@ function HomePage() {
             flexWrap: "wrap",
             gap: "38px",
             justifyContent: "left",
+            marginBottom: "30px",
           }}
         >
           {RestaurantTable.map((table) => (
             <TableCard key={table.id} table={table} />
           ))}
         </Box>
+        <TodayTrade />
       </Container>
     </Box>
   );
