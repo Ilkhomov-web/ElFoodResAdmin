@@ -32,12 +32,12 @@ function TableCard(props) {
           top: "10px",
           left: "10px",
           background: "red",
-          padding: "7px 10px",
-          borderRadius: "50px",
+          padding: "4px 7px",
+          borderRadius: "10px",
           color: "#fff",
         }}
       >
-        #{table.id}
+        {table.tableNumber}
       </Typography>
       <Typography
         sx={{
